@@ -1,0 +1,59 @@
+<%= javascript_tag do %>
+  window.addNewArticle = function(title, contents, articleId) {
+  return (`
+  <tr>
+    <td>
+      ${articleId}
+    </td>
+    <td>
+      ${title}
+    </td>
+    <td>
+      ${contents}
+    </td>
+    <td><a href="/boards/${articleId}">Show</a></td>
+    <td><a href="/boards/${articleId}/edit">Edit</a></td>
+    <td><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/boards/${articleId}">Destroy</a></td>
+  </tr>`);
+  };
+<% end %>
+
+
+<p id="notice"><%= notice %></p>
+
+<h1>Boards</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Title</th>
+    <th>Contents</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @boards.each do |board| %>
+    <tr>
+      <td class="id-<%= board.id %>">
+        <%= board.id %>
+      </td>
+      <td>
+        <%= board.title %>
+      </td>
+      <td>
+        <%= board.contents %></td>
+      <td><%= link_to 'Show', board %></td>
+      <td><%= link_to 'Edit', edit_board_path(board) %></td>
+      <td><%= link_to 'Destroy', board, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Board', new_board_path %>
+
+<%= javascript_include_tag 'boards/index', 'data-turbolinks-track': 'reload' %>

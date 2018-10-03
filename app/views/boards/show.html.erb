@@ -1,0 +1,25 @@
+<%= javascript_tag do %>
+  window.board_id = "<%= @board_id %>";
+<% end %>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <div id="title">
+    <%= @board.title %>
+  </div>
+</p>
+
+<p>
+  <strong>Contents:</strong>
+  <div id="contents">
+    <%= @board.contents %>
+  </div>
+</p>
+
+<%= link_to 'Edit', edit_board_path(@board) %> |
+<%= link_to 'Back', boards_path %>
+
+
+<%= javascript_include_tag 'boards/show', 'data-turbolinks-track': 'reload' %>
